@@ -1,54 +1,88 @@
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f0f0f0;
-    font-family: Arial, sans-serif;
-    flex-direction: column;
+// Variables
+$cell-size: 100px;
+$cell-gap: 10px;
+$board-gap: 20px;
+$primary-color: #3498db;
+$secondary-color: #f0f0f0;
+$border-color: #ddd;
+$text-color: #333;
+$hover-color: #e1f5fe;
+
+// Contenedor principal
+#game {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: $board-gap;
+  justify-content: center;
+  margin-top: 20px;
 }
 
-.tic-tac-toe {
-    display: grid;
-    grid-template-columns: repeat(3, 100px);
-    grid-template-rows: repeat(3, 100px);
-    gap: 5px;
-    margin-bottom: 20px;
-}
+// Estilos para cada tablero de TaTeTi
+.ta-te-ti {
+  display: grid;
+  grid-template-columns: repeat(3, $cell-size);
+  grid-template-rows: repeat(3, $cell-size);
+  gap: $cell-gap;
+  border: 2px solid $primary-color;
+  border-radius: 8px;
+  padding: 10px;
+  background-color: $secondary-color;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
-.cell {
-    background-color: white;
-    border: 2px solid #333;
+  // Estilos para cada celda
+  .cell {
+    width: $cell-size;
+    height: $cell-size;
+    background-color: $secondary-color;
+    border: 1px solid $border-color;
     display: flex;
-    justify-content: center;
     align-items: center;
-    font-size: 36px;
-    font-weight: bold;
+    justify-content: center;
+    font-size: 2rem;
+    color: $text-color;
     cursor: pointer;
     transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: $hover-color;
+    }
+
+    // Estilo cuando la celda está ocupada
+    &.occupied {
+      cursor: not-allowed;
+      color: darken($text-color, 10%);
+    }
+  }
 }
 
-.cell:hover {
-    background-color: #f1f1f1;
+.row{
+    display: flex;
+    flex-direction: row;
+
 }
 
+// Estilos para el estado del juego y botón de reinicio
 .status {
-    margin-bottom: 10px;
-    font-size: 24px;
-    color: #333;
+  margin-top: 20px;
+  font-size: 1.2rem;
+  text-align: center;
+  color: $text-color;
 }
 
 .restart {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: #fff;
+  background-color: $primary-color;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 
-.restart:hover {
-    background-color: #45a049;
+  &:hover {
+    background-color: lighten($primary-color, 10%);
+  }
 }

@@ -8,6 +8,11 @@ $border-color: #ddd;
 $text-color: #333;
 $hover-color: #e1f5fe;
 
+#core{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
 
 // Contenedor principal
 #game {
@@ -58,9 +63,9 @@ $hover-color: #e1f5fe;
 }
 
 .row{
-    display: flex;
-    flex-direction: row;
-
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 // Estilos para el estado del juego y botón de reinicio

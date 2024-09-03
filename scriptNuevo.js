@@ -12,6 +12,9 @@ class juego{
         this.recuento[index] = turno;
         console.log(this.recuento);
         this.verificarEstado();
+        if(megaJuego.gameState !== 'en curso'){
+            actualTaTeTi = -2
+        }
     }
 
     verificarEstado() {
@@ -21,12 +24,13 @@ class juego{
             [0, 4, 8], [2, 4, 6]  // Diagonales
         ];
 
+        //to do: poner "or"s con empate para que cuente para ambos
         for (let combinacion of combinacionesGanadoras) {
             const [a, b, c] = combinacion;
-            if (this.recuento[a] && this.recuento[a] === this.recuento[b] && this.recuento[a] === this.recuento[c]) {
-                this.gameState = `Ganador: ${this.recuento[a]}`;
+            if ((this.recuento[a]) && this.recuento[a] === this.recuento[b] && this.recuento[a] === this.recuento[c]) {
+                this.gameState = `${this.recuento[a]}`;
                 console.log(this.gameState);
-                //falta lo visual
+                document.querySelector('.status').textContent = `El ganador es: ${this.gameState}`;
                 return;
             }
         }
@@ -71,11 +75,13 @@ class TaTeTi extends juego {
             return;
         }
 
+        //guarda el indice del tablero para el proximo turno
         if(juegos[index].gameState === 'en curso'){
             actualTaTeTi = index;
         }else{
             actualTaTeTi = -1;
         }
+
         // Marcar la celda con el turno actual
         celda.textContent = turno;
         this.recuento[index] = turno;
@@ -83,14 +89,17 @@ class TaTeTi extends juego {
         // Verificar si hay un ganador o un empate después de la marca
         this.verificarEstado();
         if (this.gameState !== 'en curso') {
+            console.log(this.recuento);
             megaJuego.marcarCelda(this.indiceJuego);
         }
 
-        // Cambiar el turno si el juego aún está en curso
-        if (this.gameState === 'en curso') {
+        // Cambiar el turno si e megaJuego no esta finalizado
+        if(megaJuego.gameState === 'en curso'){
             turno = turno === 'X' ? 'O' : 'X';
             document.querySelector('.status').textContent = `Turno del jugador ${turno} en ${actualTaTeTi}`;
         }
+        
+        
     }
 
     // Método para verificar el estado del juego
@@ -105,6 +114,7 @@ class TaTeTi extends juego {
             const [a, b, c] = combinacion;
             if (this.recuento[a] && this.recuento[a] === this.recuento[b] && this.recuento[a] === this.recuento[c]) {
                 this.gameState = this.recuento[a];
+                console.log(this.gameState);
                 document.querySelector('.status').textContent = `Juego ${this.indiceJuego}: ${this.gameState}`;
                 return;
             }

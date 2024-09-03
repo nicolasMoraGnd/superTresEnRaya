@@ -1,15 +1,60 @@
 var turno = "X";
 var actualTaTeTi = -1;
+let partida = Array(9).fill(null);
 
-// Definir la clase TaTeTi para manejar un juego individual
-class TaTeTi {
-    constructor(contenedor, indiceJuego) {
-        this.contenedor = contenedor; // Contenedor del juego (div.ta-te-ti)
-        this.celdas = Array.from(this.contenedor.getElementsByClassName('cell')); // Celdas individuales del juego
-        this.turno = 'X'; // El primer turno es siempre del jugador 'X'
+class juego{
+    constructor(){
         this.gameState = 'en curso'; // Estado inicial del juego
         this.recuento = Array(9).fill(null); // Array para llevar el recuento del juego
+    }
+
+    marcarCelda(index){
+        this.recuento[index] = turno;
+        console.log(this.recuento);
+        this.verificarEstado();
+    }
+
+    verificarEstado() {
+        const combinacionesGanadoras = [
+            [0, 1, 2], [3, 4, 5], [6, 7, 8], // Filas
+            [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columnas
+            [0, 4, 8], [2, 4, 6]  // Diagonales
+        ];
+
+        for (let combinacion of combinacionesGanadoras) {
+            const [a, b, c] = combinacion;
+            if (this.recuento[a] && this.recuento[a] === this.recuento[b] && this.recuento[a] === this.recuento[c]) {
+                this.gameState = `Ganador: ${this.recuento[a]}`;
+                console.log(this.gameState);
+                //falta lo visual
+                return;
+            }
+        }
+
+        // Verificar si todas las celdas están llenas (empate)
+        if (!this.recuento.includes(null)) {
+            this.gameState = 'Empate';
+            //falta lo visual
+        }
+    }
+    reiniciar() {
+        this.gameState = 'en curso';
+        this.recuento.fill(null);
+        actualTaTeTi = -1;
+    }
+}
+//definimos la instancia de la partida actual
+const megaJuego = new juego;
+
+
+// Definir la clase TaTeTi para manejar un juego individual
+class TaTeTi extends juego {
+    constructor(contenedor, indiceJuego) {
+        super();
+        this.contenedor = contenedor; // Contenedor del juego (div.ta-te-ti)
+        this.celdas = Array.from(this.contenedor.getElementsByClassName('cell')); // Celdas individuales del juego
         this.indiceJuego = indiceJuego; // Índice del juego en el tablero
+        
 
         // Añadir evento de clic a cada celda
         this.celdas.forEach((celda) => {
@@ -21,15 +66,11 @@ class TaTeTi {
     marcarCelda(event) {
         const celda = event.target;
         const index = parseInt(celda.dataset.index, 10);
-
         // Verificar si el juego está en curso y si la celda está vacía
         if ((this.gameState !== 'en curso' || this.recuento[index] !== null) || !(this.indiceJuego == actualTaTeTi || actualTaTeTi == -1)) {
             return;
         }
 
-        console.log(this.indiceJuego);
-        console.log(actualTaTeTi);
-        console.log(`bool igualdad:${(this.gameState !== 'en curso' || this.recuento[index] !== null) && !(this.indiceJuego == actualTaTeTi)}`)
         if(juegos[index].gameState === 'en curso'){
             actualTaTeTi = index;
         }else{
@@ -39,22 +80,16 @@ class TaTeTi {
         celda.textContent = turno;
         this.recuento[index] = turno;
 
-        // Obtener el número del tablero actual (data-spaceIndex)
-        const numeroTableroActual = this.indiceJuego;
-        console.log(`Número del tablero actual: ${numeroTableroActual}`);
-
-        // Acceder a otro tablero (por ejemplo, tablero 0)
-
-        const otroTablero = juegos[index]; // Accedemos al tablero con índice 0
-        console.log(`Estado del tablero:`, otroTablero.gameState);
-
         // Verificar si hay un ganador o un empate después de la marca
         this.verificarEstado();
+        if (this.gameState !== 'en curso') {
+            megaJuego.marcarCelda(this.indiceJuego);
+        }
 
         // Cambiar el turno si el juego aún está en curso
         if (this.gameState === 'en curso') {
             turno = turno === 'X' ? 'O' : 'X';
-            document.querySelector('.status').textContent = `Turno del jugador ${turno}`;
+            document.querySelector('.status').textContent = `Turno del jugador ${turno} en ${actualTaTeTi}`;
         }
     }
 
@@ -69,8 +104,8 @@ class TaTeTi {
         for (let combinacion of combinacionesGanadoras) {
             const [a, b, c] = combinacion;
             if (this.recuento[a] && this.recuento[a] === this.recuento[b] && this.recuento[a] === this.recuento[c]) {
-                this.gameState = `Ganador: ${this.recuento[a]}`;
-                document.querySelector('.status').textContent = `Juego ${this.indiceJuego + 1}: ${this.gameState}`;
+                this.gameState = this.recuento[a];
+                document.querySelector('.status').textContent = `Juego ${this.indiceJuego}: ${this.gameState}`;
                 return;
             }
         }
@@ -84,11 +119,12 @@ class TaTeTi {
 
     // Método para reiniciar el juego
     reiniciar() {
-        this.turno = 'X';
+        turno = 'X';
         this.gameState = 'en curso';
         this.recuento.fill(null);
         this.celdas.forEach(celda => celda.textContent = '');
-        document.querySelector('.status').textContent = `Turno del jugador ${this.turno}`;
+        actualTaTeTi = -1;
+        document.querySelector('.status').textContent = `Turno del jugador ${turno}`;
     }
 }
 
@@ -103,5 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Añadir evento para el botón de reinicio
     document.querySelector('.restart').addEventListener('click', () => {
         juegos.forEach(juego => juego.reiniciar());
+        megaJuego.reiniciar();
     });
+    
 });

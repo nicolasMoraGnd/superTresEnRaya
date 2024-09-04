@@ -76,8 +76,10 @@ class TaTeTi extends juego {
         }
 
         //guarda el indice del tablero para el proximo turno
+        this.contenedor.style.backgroundColor = '#f0f0f0';
         if(juegos[index].gameState === 'en curso'){
             actualTaTeTi = index;
+            juegos[index].contenedor.style.backgroundColor = 'lightblue';
         }else{
             actualTaTeTi = -1;
         }
@@ -96,7 +98,7 @@ class TaTeTi extends juego {
         // Cambiar el turno si e megaJuego no esta finalizado
         if(megaJuego.gameState === 'en curso'){
             turno = turno === 'X' ? 'O' : 'X';
-            document.querySelector('.status').textContent = `Turno del jugador ${turno} en ${actualTaTeTi}`;
+            document.querySelector('.status').textContent = `Turno del jugador ${turno} en ${actualTaTeTi + 1}`;
         }
         
         

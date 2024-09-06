@@ -75,14 +75,7 @@ class TaTeTi extends juego {
             return;
         }
 
-        //guarda el indice del tablero para el proximo turno
-        this.contenedor.style.backgroundColor = '#f0f0f0';
-        if(juegos[index].gameState === 'en curso'){
-            actualTaTeTi = index;
-            juegos[actualTaTeTi].contenedor.style.backgroundColor = 'lightblue';
-        }else{
-            actualTaTeTi = -1;
-        }
+        
 
         // Marcar la celda con el turno actual
         celda.textContent = turno;
@@ -93,6 +86,15 @@ class TaTeTi extends juego {
         if (this.gameState !== 'en curso') {
             console.log(this.recuento);
             megaJuego.marcarCelda(this.indiceJuego);
+        }
+
+        //guarda el indice del tablero para el proximo turno
+        this.contenedor.style.backgroundColor = '#f0f0f0';
+        if(juegos[index].gameState === 'en curso'){
+            actualTaTeTi = index;
+            juegos[actualTaTeTi].contenedor.style.backgroundColor = 'lightblue';
+        }else{
+            actualTaTeTi = -1;
         }
 
         // Cambiar el turno si e megaJuego no esta finalizado

@@ -49,7 +49,7 @@ $hover-color: #e1f5fe;
     align-items: center;
     justify-content: center;
     font-size: 15rem; // Tamaño grande para el símbolo de ganador
-    color: rgb(0, 0, 0); // Color semitransparente para superponer sobre las celdas
+    color: rgba(0, 0, 0, 0.904); // Color semitransparente para superponer sobre las celdas
     pointer-events: none; // No permite interactuar con el símbolo de ganador
   }
   

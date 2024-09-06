@@ -140,6 +140,7 @@ class TaTeTi extends juego {
         this.recuento.fill(null);
         this.celdas.forEach(celda => celda.textContent = '');
         actualTaTeTi = -1;
+        this.contenedor.style.backgroundColor = '#f0f0f0';
         document.querySelector('.status').textContent = `Turno del jugador ${turno}`;
     }
 }

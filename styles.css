@@ -15,8 +15,8 @@
 
 .ta-te-ti {
   display: grid;
-  grid-template-columns: repeat(3, 100px);
-  grid-template-rows: repeat(3, 100px);
+  grid-template-columns: repeat(3, 90px);
+  grid-template-rows: repeat(3, 90px);
   gap: 10px;
   border: 2px solid #3498db;
   border-radius: 8px;
@@ -46,8 +46,8 @@
   content: "O";
 }
 .ta-te-ti .cell {
-  width: 100px;
-  height: 100px;
+  width: 90px;
+  height: 90px;
   background-color: #f0f0f0;
   border: 1px solid #ddd;
   display: flex;

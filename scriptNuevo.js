@@ -79,7 +79,7 @@ class TaTeTi extends juego {
         this.contenedor.style.backgroundColor = '#f0f0f0';
         if(juegos[index].gameState === 'en curso'){
             actualTaTeTi = index;
-            juegos[index].contenedor.style.backgroundColor = 'lightblue';
+            juegos[actualTaTeTi].contenedor.style.backgroundColor = 'lightblue';
         }else{
             actualTaTeTi = -1;
         }
@@ -116,8 +116,8 @@ class TaTeTi extends juego {
             const [a, b, c] = combinacion;
             if (this.recuento[a] && this.recuento[a] === this.recuento[b] && this.recuento[a] === this.recuento[c]) {
                 this.gameState = this.recuento[a];
-                console.log(this.gameState);
                 document.querySelector('.status').textContent = `Juego ${this.indiceJuego}: ${this.gameState}`;
+                this.markSquareAsWon();
                 return;
             }
         }
@@ -127,6 +127,10 @@ class TaTeTi extends juego {
             this.gameState = 'Empate';
             document.querySelector('.status').textContent = `Juego ${this.indiceJuego + 1}: ${this.gameState}`;
         }
+    }
+
+    markSquareAsWon() {
+        this.contenedor.classList.add(this.gameState === 'X' ? 'won-x' : 'won-o');
     }
 
     // Método para reiniciar el juego

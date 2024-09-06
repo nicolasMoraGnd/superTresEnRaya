@@ -35,8 +35,33 @@ $hover-color: #e1f5fe;
   padding: 10px;
   background-color: $secondary-color;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative; // Para manejar el pseudoelemento
+  
+  // Estilos para el marcador de ganador
+  &.won-x::after, &.won-o::after {
+    content: ''; // Contenido vacío inicialmente, lo actualizaremos con JS
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15rem; // Tamaño grande para el símbolo de ganador
+    color: rgb(0, 0, 0); // Color semitransparente para superponer sobre las celdas
+    pointer-events: none; // No permite interactuar con el símbolo de ganador
+  }
+  
+  // Diferentes símbolos para X y O
+  &.won-x::after {
+    content: 'X'; // Para marcar una victoria de X
+  }
+  
+  &.won-o::after {
+    content: 'O'; // Para marcar una victoria de O
+  }
 
-  // Estilos para cada celda
   .cell {
     width: $cell-size;
     height: $cell-size;
@@ -54,14 +79,12 @@ $hover-color: #e1f5fe;
       background-color: $hover-color;
     }
 
-    // Estilo cuando la celda está ocupada
     &.occupied {
       cursor: not-allowed;
       color: darken($text-color, 10%);
     }
   }
 }
-
 .row{
   display: flex;
   flex-direction: row;

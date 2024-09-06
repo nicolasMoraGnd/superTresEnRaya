@@ -119,7 +119,7 @@ class TaTeTi extends juego {
             if (this.recuento[a] && this.recuento[a] === this.recuento[b] && this.recuento[a] === this.recuento[c]) {
                 this.gameState = this.recuento[a];
                 document.querySelector('.status').textContent = `Juego ${this.indiceJuego}: ${this.gameState}`;
-                this.markSquareAsWon();
+                this.marcarCuadradoGanado();
                 return;
             }
         }
@@ -131,7 +131,7 @@ class TaTeTi extends juego {
         }
     }
 
-    markSquareAsWon() {
+    marcarCuadradoGanado() {
         this.contenedor.classList.add(this.gameState === 'X' ? 'won-x' : 'won-o');
     }
 

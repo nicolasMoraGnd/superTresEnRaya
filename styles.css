@@ -25,7 +25,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: relative;
 }
-.ta-te-ti.won-x::after, .ta-te-ti.won-o::after {
+.ta-te-ti.won-x::after, .ta-te-ti.won-o::after, .ta-te-ti.draw::after {
   content: "";
   position: absolute;
   top: 0;
@@ -41,9 +41,14 @@
 }
 .ta-te-ti.won-x::after {
   content: "X";
+  color: rgba(163, 0, 0, 0.904);
 }
 .ta-te-ti.won-o::after {
   content: "O";
+  color: rgba(15, 184, 0, 0.904);
+}
+.ta-te-ti.draw::after {
+  content: "#";
 }
 .ta-te-ti .cell {
   width: 90px;

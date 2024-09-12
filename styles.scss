@@ -38,7 +38,7 @@ $hover-color: #e1f5fe;
   position: relative; // Para manejar el pseudoelemento
   
   // Estilos para el marcador de ganador
-  &.won-x::after, &.won-o::after {
+  &.won-x::after, &.won-o::after, &.draw::after {
     content: ''; // Contenido vacío inicialmente, lo actualizaremos con JS
     position: absolute;
     top: 0;
@@ -56,10 +56,16 @@ $hover-color: #e1f5fe;
   // Diferentes símbolos para X y O
   &.won-x::after {
     content: 'X'; // Para marcar una victoria de X
+    color: rgba(163, 0, 0, 0.904);
   }
   
   &.won-o::after {
     content: 'O'; // Para marcar una victoria de O
+    color: rgba(15, 184, 0, 0.904);
+  }
+
+  &.draw::after{
+    content: '#';
   }
 
   .cell {

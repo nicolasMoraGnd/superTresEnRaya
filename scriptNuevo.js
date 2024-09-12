@@ -12,7 +12,7 @@ class juego{
     }
 
     marcarCelda(index){
-        this.recuento[index] = turno;
+        this.recuento[index] = juegos[index].gameState;
         console.log(this.recuento);
         this.verificarEstado();
         if(megaJuego.gameState !== 'en curso'){
@@ -30,7 +30,9 @@ class juego{
         //to do: poner "or"s con empate para que cuente para ambos
         for (let combinacion of combinacionesGanadoras) {
             const [a, b, c] = combinacion;
-            if ((this.recuento[a]) && this.recuento[a] === this.recuento[b] && this.recuento[a] === this.recuento[c]) {
+            if (((this.recuento[a]) || (this.recuento[a] === 'Empate')) &&
+             ((this.recuento[a] === this.recuento[b]) || (this.recuento[b] === 'Empate')) && 
+             ((this.recuento[a] === this.recuento[c]) || (this.recuento[c] === 'Empate'))) {
                 this.gameState = `${this.recuento[a]}`;
                 console.log(this.gameState);
                 document.querySelector('.status').textContent = `El ganador es: ${this.gameState}`;
@@ -139,11 +141,17 @@ class TaTeTi extends juego {
         if (!this.recuento.includes(null)) {
             this.gameState = 'Empate';
             document.querySelector('.status').textContent = `Juego ${this.indiceJuego + 1}: ${this.gameState}`;
+            this.marcarCuadradoGanado();
         }
     }
 
     marcarCuadradoGanado() {
-        this.contenedor.classList.add(this.gameState === 'X' ? 'won-x' : 'won-o');
+        if(this.gameState === 'Empate'){
+            this.contenedor.classList.add('draw');
+        }else{
+            this.contenedor.classList.add(this.gameState === 'X' ? 'won-x' : 'won-o');
+        }
+        
     }
 
     // Método para reiniciar el juego

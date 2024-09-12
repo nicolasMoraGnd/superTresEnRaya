@@ -1,14 +1,14 @@
-Hello, this is a small personal project.
-This is a game called "megaTateti" or "megaTicTacToe".
+SuperTateti (Super TicTacToe)
+Welcome! This is a small personal project called "Super Tateti" or "Super TicTacToe."
 
-These are the rules:
-- always starts the X
-- In the first turn you can mark wherever you want
-- after you have to mark on the board that corresponds to the box your opponent marked
-- when you win a board, that boardis yours
-- to win the game you have to mark 3 bourd in row, column or diagonal (like normal TicTacToe)
-- if your opponent mark in a box and that board is already won, you can marj wherever you want
+Game Rules:
+    -You can choose who starts, or the game can begin with "X" starting by default.
+    -On the first turn, you can mark any cell on any board.
+    -After the first turn, you must place your mark on the board that corresponds to the cell your opponent selected in the previous turn.
+    -When you win a board, that board becomes yours.
+    -To win the overall game, you must win 3 boards in a row, column, or diagonal (just like in traditional TicTacToe).
+    -If your opponent marks a cell on a board that has already been won, you are free to place your mark on any board you choose.
 
-for a more detailed rules you have this document:
+For more detailed rules, please refer to this document:
 
-Thanks to lukas for introduce me to this wonderful game.
+Special thanks to Lukas for introducing me to this wonderful game.

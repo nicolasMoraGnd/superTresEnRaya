@@ -1,6 +1,9 @@
-var turno = "X";
+const turnoSelect = document.getElementById('turno');
+var turno = turnoSelect.value;
 var actualTaTeTi = -1;
 let partida = Array(9).fill(null);
+let gameInProcess = false;
+
 
 class juego{
     constructor(){
@@ -42,13 +45,14 @@ class juego{
         }
     }
     reiniciar() {
+        turno = turnoSelect.value;
+        gameInProcess = false;
         this.gameState = 'en curso';
         this.recuento.fill(null);
         actualTaTeTi = -1;
     }
 }
-//definimos la instancia de la partida actual
-const megaJuego = new juego;
+
 
 
 // Definir la clase TaTeTi para manejar un juego individual
@@ -75,7 +79,9 @@ class TaTeTi extends juego {
             return;
         }
 
-        
+        if(gameInProcess == false){
+            gameInProcess = true;
+        }
 
         // Marcar la celda con el turno actual
         celda.textContent = turno;
@@ -100,7 +106,12 @@ class TaTeTi extends juego {
         // Cambiar el turno si e megaJuego no esta finalizado
         if(megaJuego.gameState === 'en curso'){
             turno = turno === 'X' ? 'O' : 'X';
-            document.querySelector('.status').textContent = `Turno del jugador ${turno} en ${actualTaTeTi + 1}`;
+            if(actualTaTeTi >= 0){
+                document.querySelector('.status').textContent = `Turno del jugador ${turno} en ${actualTaTeTi + 1}`;
+            }else{
+                document.querySelector('.status').textContent = `Turno del jugador ${turno} en donde quiera`;
+            }
+            
         }
         
         
@@ -137,7 +148,7 @@ class TaTeTi extends juego {
 
     // Método para reiniciar el juego
     reiniciar() {
-        turno = 'X';
+
         this.gameState = 'en curso';
         this.recuento.fill(null);
         this.celdas.forEach(celda => celda.textContent = '');
@@ -154,6 +165,9 @@ class TaTeTi extends juego {
     }
 }
 
+//definimos la instancia de la partida actual
+const megaJuego = new juego;
+
 // Array para almacenar todas las instancias de los tableros de TaTeTi
 let juegos = [];
 
@@ -168,4 +182,12 @@ document.addEventListener('DOMContentLoaded', () => {
         megaJuego.reiniciar();
     });
     
+});
+
+turnoSelect.addEventListener('change', function() {
+    const selectedValue = turnoSelect.value;  // Obtiene el valor de la opción seleccionada
+    if(!gameInProcess){
+        turno = selectedValue;
+        document.querySelector('.status').textContent = `Turno del jugador ${turno}`;
+    }
 });

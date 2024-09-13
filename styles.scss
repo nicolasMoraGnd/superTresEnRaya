@@ -84,6 +84,7 @@ $hover-color: #e1f5fe;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: relative; // Para manejar el pseudoelemento
   
+  
   // Estilos para el marcador de ganador
   &.won-x::after, &.won-o::after, &.draw::after {
     content: ''; // Contenido vacío inicialmente, lo actualizaremos con JS
@@ -98,6 +99,10 @@ $hover-color: #e1f5fe;
     font-size: 15rem; // Tamaño grande para el símbolo de ganador
     color: rgba(0, 0, 0, 0.904); // Color semitransparente para superponer sobre las celdas
     pointer-events: none; // No permite interactuar con el símbolo de ganador
+
+    @media (max-width: 480px) {
+      font-size: 5rem;
+    }
   }
   
   // Diferentes símbolos para X y O
@@ -139,6 +144,7 @@ $hover-color: #e1f5fe;
     @media (max-width: 480px) {
       width: 30px;
       height: 30px;
+      font-size: 1rem;
     }
   }
 

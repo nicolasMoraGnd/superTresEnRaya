@@ -85,6 +85,11 @@
   color: rgba(0, 0, 0, 0.904);
   pointer-events: none;
 }
+@media (max-width: 480px) {
+  .ta-te-ti.won-x::after, .ta-te-ti.won-o::after, .ta-te-ti.draw::after {
+    font-size: 5rem;
+  }
+}
 .ta-te-ti.won-x::after {
   content: "X";
   color: rgba(163, 0, 0, 0.904);
@@ -120,6 +125,7 @@
   .ta-te-ti .cell {
     width: 30px;
     height: 30px;
+    font-size: 1rem;
   }
 }
 @media (max-width: 480px) {

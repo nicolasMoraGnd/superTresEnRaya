@@ -1,7 +1,8 @@
-SuperTateti (Super TicTacToe)
+# SuperTateti (Super TicTacToe)
+
 Welcome! This is a small personal project called "Super Tateti" or "Super TicTacToe."
 
-Game Rules:
+## Game Rules:
     -You can choose who starts, or the game can begin with "X" starting by default.
     -On the first turn, you can mark any cell on any board.
     -After the first turn, you must place your mark on the board that corresponds to the cell your opponent selected in the previous turn.

@@ -3,6 +3,52 @@
   justify-content: center;
   flex-direction: column;
 }
+#core .userTable {
+  display: flex;
+  justify-content: center;
+  width: 40%;
+  margin-top: 1em;
+}
+#core .userTable .restart {
+  display: block;
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #3498db;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+#core .userTable .restart:hover {
+  background-color: #5faee3;
+}
+@media (max-width: 480px) {
+  #core .userTable .restart {
+    padding: 3px 6px;
+  }
+}
+#core .userTable #turno {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #3498db;
+}
+@media (max-width: 480px) {
+  #core .userTable #turno {
+    padding: 3px 6px;
+  }
+}
+@media (max-width: 480px) {
+  #core .userTable {
+    width: 100%;
+    justify-content: space-evenly;
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
 
 #game {
   display: flex;
@@ -70,6 +116,19 @@
   cursor: not-allowed;
   color: #1a1a1a;
 }
+@media (max-width: 480px) {
+  .ta-te-ti .cell {
+    width: 30px;
+    height: 30px;
+  }
+}
+@media (max-width: 480px) {
+  .ta-te-ti {
+    grid-template-columns: repeat(3, 30px);
+    grid-template-rows: repeat(3, 30px);
+    gap: 10px;
+  }
+}
 
 .row {
   display: flex;
@@ -79,23 +138,13 @@
 
 .status {
   margin-top: 20px;
-  font-size: 1.2rem;
+  font-size: 2rem;
   text-align: center;
   color: #333;
 }
-
-.restart {
-  display: block;
-  margin: 20px auto;
-  padding: 10px 20px;
-  font-size: 1rem;
-  color: #fff;
-  background-color: #3498db;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-.restart:hover {
-  background-color: #5faee3;
+@media (max-width: 480px) {
+  .status {
+    font-size: 1em;
+    margin-top: 10px;
+  }
 }/*# sourceMappingURL=styles.css.map */
